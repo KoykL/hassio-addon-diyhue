@@ -1,9 +1,9 @@
-ARG BUILD_FROM=hassioaddons/base-python:5.3.4
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:14.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
 # Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # Set the build architecture and convert it from hassio to diyhue style
 # armhf, armv7, aarch64, amd64, i386
@@ -19,7 +19,7 @@ ENV WORKING_DIR=/opt/hue-emulator
 RUN mkdir diyhue config ${WORKING_DIR}
 
 # Install all needed dependencies
-RUN apk add -q -u python3 openssl nmap psmisc iproute2 alpine-sdk build-base
+RUN apk add --no-cache python3 openssl nmap psmisc iproute2 alpine-sdk build-base
 RUN apk add --no-cache bluez
 
 # Download diyhue and untar it
